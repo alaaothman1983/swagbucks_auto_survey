@@ -123,7 +123,7 @@ def create_proxyauth_extension(proxy_host, proxy_port,proxy_username, proxy_pass
 
         
 def initdriver(proxy):
-    proxy = "megaproxy.rotating.proxyrack.net:222"
+    proxy = "proxy"
     print(proxy)
     chrome_options = webdriver.ChromeOptions()
 
@@ -174,8 +174,8 @@ def initdriver(proxy):
     proxyauth_plugin_path = create_proxyauth_extension(
     proxy_host=str(str(proxy.split(":")[0]).strip().replace("\n","").replace("\r","")),  #"51.161.115.64",
     proxy_port=str(str(proxy.split(":")[1]).strip().replace("\n","").replace("\r","")),#80,
-    proxy_username=str('bobiscool113-country-US-refreshMinutes-60'),#+str(countries[therand])),#str(str(proxy.split(":")[2]).strip().replace("\n","").replace("\r","")),#"country-ca",
-    proxy_password='e9e113-251591-1dc380-248832-0e39c5',#str(str(proxy.split(":")[3]).strip().replace("\n","").replace("\r","")),#"ead2795d-a80d-4ea0-b686-c08f23894210",
+    proxy_username=str('user'),#+str(countries[therand])),#str(str(proxy.split(":")[2]).strip().replace("\n","").replace("\r","")),#"country-ca",
+    proxy_password='passw',#str(str(proxy.split(":")[3]).strip().replace("\n","").replace("\r","")),#,
     scheme='http'
     )
     chrome_options.add_extension(proxyauth_plugin_path)
@@ -847,7 +847,7 @@ def completesurveys(driver, index):
 
 def captcha(driver,index):
 
-
+    key = "2captchakeyhere"
     #cookies = {'AWSALBCORS':'GsunlYJhUTO0tUJOOy2xtAcMRYmKszZzCmCgJCZDUFvSiHDkbL73TeK9SWdt1iKg3oVHMnjBHDeIhfTs7iIa/9gjba1JQsK4l/KTz0HzjsN+mNvmQe1hYTNczfVB','AWSALB':'GsunlYJhUTO0tUJOOy2xtAcMRYmKszZzCmCgJCZDUFvSiHDkbL73TeK9SWdt1iKg3oVHMnjBHDeIhfTs7iIa/9gjba1JQsK4l/KTz0HzjsN+mNvmQe1hYTNczfVB','_hp2_id.715588404':'%7B%22userId%22%3A%228507714292604552%22%2C%22pageviewId%22%3A%227618944432711688%22%2C%22sessionId%22%3A%228526999139391128%22%2C%22identity%22%3A%22109508438%22%2C%22trackerVersion%22%3A%224.0%22%2C%22identityField%22%3Anull%2C%22isIdentified%22%3A1%2C%22oldIdentity%22%3Anull%7D'}
     #response = requests.get(src, headers={'User-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'}, cookies=cookies)
     driver.get_screenshot_as_file(str("captcha"+str(index)+".png"))
@@ -866,7 +866,7 @@ def captcha(driver,index):
     for _ in range(3):
         try:
             files = {'file': open(str("captcha"+str(index)+".png"), 'rb')}
-            data = {'key': '3fd94090a145df3bd4889a46ecfebbf6', 'method': 'post','textinstructions':'"Find the captcha in the picture and enter the captcha letters ONLY (3 letters)"'}
+            data = {'key': key, 'method': 'post','textinstructions':'"Find the captcha in the picture and enter the captcha letters ONLY (3 letters)"'}
             response = requests.post("http://2captcha.com/in.php",data=data, files=files)
             print(response.text)
             if "OK" in str(response.text):
@@ -881,7 +881,7 @@ def captcha(driver,index):
 
     for _ in range(90):
         try:
-            response = requests.get(str("http://2captcha.com/res.php?key=3fd94090a145df3bd4889a46ecfebbf6&action=get&id="+str(theid)))
+            response = requests.get(str("http://2captcha.com/res.php?key="+str(key)+"&action=get&id="+str(theid)))
             print(response.text)
             if "OK" in str(response.text):
                 answer = str(response.text).split("|")[1].strip().replace("\n","").replace("\r","")
@@ -975,10 +975,10 @@ def search(driver,index):
 
 def recaptcha(driver):
     #RECAPTCHA
- 
+        key = "2capchakeyhere"
         for _ in range(10):
             try:
-                response = requests.get("http://2captcha.com/in.php?key=3fd94090a145df3bd4889a46ecfebbf6&googlekey=6Ld48JYUAAAAAGBYDutKlRp2ggwiDzfl1iApfaxE&method=userrecaptcha&pageurl=https://www.swagbucks.com/p/login")
+                response = requests.get(str("http://2captcha.com/in.php?key="+str(key)+"&googlekey=6Ld48JYUAAAAAGBYDutKlRp2ggwiDzfl1iApfaxE&method=userrecaptcha&pageurl=https://www.swagbucks.com/p/login"))
                 if "OK" in str(response.text):
                     captchakey = str(response.text).split("|")[1].strip().replace("\n","").replace("\r","")
                     print(str("Got first key: "+str(captchakey)))
@@ -996,7 +996,7 @@ def recaptcha(driver):
 
         for _ in range(90):
             try:
-                response = requests.get("http://2captcha.com/res.php?key=3fd94090a145df3bd4889a46ecfebbf6&action=get&id="+str(captchakey))
+                response = requests.get(str("http://2captcha.com/res.php?key="+str(key)+"&action=get&id="+str(captchakey)))
                 print(response.text)
                 if "OK" in str(response.text):
                     finalkey = str(response.text).split("|")[1].strip().replace("\r","").replace("\n","")
