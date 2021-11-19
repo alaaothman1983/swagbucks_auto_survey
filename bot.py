@@ -848,8 +848,7 @@ def completesurveys(driver, index):
 def captcha(driver,index):
 
     key = "2captchakeyhere"
-    #cookies = {'AWSALBCORS':'GsunlYJhUTO0tUJOOy2xtAcMRYmKszZzCmCgJCZDUFvSiHDkbL73TeK9SWdt1iKg3oVHMnjBHDeIhfTs7iIa/9gjba1JQsK4l/KTz0HzjsN+mNvmQe1hYTNczfVB','AWSALB':'GsunlYJhUTO0tUJOOy2xtAcMRYmKszZzCmCgJCZDUFvSiHDkbL73TeK9SWdt1iKg3oVHMnjBHDeIhfTs7iIa/9gjba1JQsK4l/KTz0HzjsN+mNvmQe1hYTNczfVB','_hp2_id.715588404':'%7B%22userId%22%3A%228507714292604552%22%2C%22pageviewId%22%3A%227618944432711688%22%2C%22sessionId%22%3A%228526999139391128%22%2C%22identity%22%3A%22109508438%22%2C%22trackerVersion%22%3A%224.0%22%2C%22identityField%22%3Anull%2C%22isIdentified%22%3A1%2C%22oldIdentity%22%3Anull%7D'}
-    #response = requests.get(src, headers={'User-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'}, cookies=cookies)
+    #cookies = {'AWSALBCORS':'    #response = requests.get(src, headers={'User-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'}, cookies=cookies)
     driver.get_screenshot_as_file(str("captcha"+str(index)+".png"))
     #if response.status_code == 200:
         #with open(str("captcha"+str(index)+".jpg"), 'wb') as f:
@@ -906,7 +905,7 @@ def search(driver,index):
         try:
             for _ in range(10):
                 try:
-                    #randkeys(driver.find_element_by_id('sbGlobalNavSearchInputWeb'),search,driver)
+                    #randkeys(driver.find_element_by_id('s'),search,driver)
                     thesearch = str(str(search).strip().replace("\n","").replace("\r","")+"+"+str(searches[random.randint(0,int(len(searches)-1)) ]).strip().replace("\n","").replace("\r",""))
                     driver.get(str("https://www.swagbucks.com/?f=11&q="+str(thesearch)))
                     time.sleep(random.uniform(0.5, 0.7))
